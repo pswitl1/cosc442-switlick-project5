@@ -400,6 +400,30 @@ public class WMethod{
     	 	Utilities.runFSM(FSM, 1, testSplitBySpaces, " ");
      }
      
+     // print test cases
+     // for each test
+     for (int i = 0; i < tests.size(); i++) {
+    	 
+    	 	// split test with spaces
+    	 	String test = tests.get(i);
+    	 	String testSplitBySpaces = "";
+    	 	for (int j = 0; j < test.length(); j++) {
+    	 		testSplitBySpaces = testSplitBySpaces + test.substring(j, j + 1);
+    	 		if (j + 1 != test.length())
+    	 			testSplitBySpaces = testSplitBySpaces + " ";
+    	 	}
+    	 	
+    	 	System.out.println("@Test\npublic void testBondRegex" + i + "() {");
+    	 	// run test
+    	 	boolean result = Utilities.runFSMQuiet(FSM, 1, testSplitBySpaces, " ");
+    	 	if (result)
+    	 		System.out.println("\tassertTrue(JamesBond.bondRegex(\"" + test + "\"));");
+    	 	else 
+    	 		System.out.println("\tassertTrue(!JamesBond.bondRegex(\"" + test + "\"));");
+    	 	System.out.println("}\n");
+    	 	
+     }
+     
    }// End of main()
    
 }//End of class WMethod
